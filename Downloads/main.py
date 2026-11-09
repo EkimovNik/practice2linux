@@ -28,6 +28,14 @@ def add_new_student(name, grades_str):
     print(f" Студент {name} успешно добавлен с ID {new_id}!")
 
 
+def del_student(student_id):
+    for student in students_db:
+        if student["id"] == student_id:
+            
+    return None
+
+
+
 def print_report():
     # Выводит красивый отчет по всем студентам
     print("\n--- ОТЧЕТ УСПЕВАЕМОСТИ ---")
@@ -42,14 +50,15 @@ def main():
         print("1. Показать отчет")
         print("2. Найти студента по ID")
         print("3. Добавить студента")
-        print("4. Выход")
+        print("4. Удаление студента по ID")
+        print("5. Выход")
 
         choice = input("Выберите действие: ")
 
         if choice == "1":
             print_report()
         elif choice == "2":
-            sid = input("Введите ID студента: ")
+            sid = int(input("Введите ID студента: "))
             student = find_student_by_id(sid)
             if student:
                 print(f"Найдено: {student['name']}, Оценки: {student['grades']}")
@@ -59,7 +68,16 @@ def main():
             name = input("Имя студента: ")
             grades = input("Оценки через запятую (например: 4,5,3): ")
             add_new_student(name, grades)
-        elif choice == "4":
+
+        elif choice == "4" :
+            sid = int(input("Введите ID студента: "))
+            student = del_student(sid)
+            if student:
+                print(f"Студент {student['name']} удален")
+            else:
+                print("Студент не найден")
+        
+        elif choice == "5":
             break
         else:
             print("Неверный пункт меню")
