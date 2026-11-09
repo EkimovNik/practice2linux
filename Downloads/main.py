@@ -27,11 +27,23 @@ def find_student_by_id(student_id):
 
 def add_new_student(name, grades_str):
     # Добавляет нового студента. Оценки передаются строкой через запятую (например: '4,5,3')
-    grades = [int(g.strip()) for g in grades_str.split(",")]
+    try:
+        grades = [int(g.strip()) for g in grades_str.split(",")]
+    except ValueError:
+        print("Ошибка: введите оценки цифрами через запятую.")
+        return
     new_id = len(students_db) + 1
     new_student = {"id": new_id, "name": name, "grades": grades}
     students_db.append(new_student)
     print(f" Студент {name} успешно добавлен с ID {new_id}!")
+
+
+def del_student(student_id):
+    for student in students_db:
+        if student["id"] == student_id:
+            
+    return None
+
 
 
 def print_report():
@@ -48,7 +60,8 @@ def main():
         print("1. Показать отчет")
         print("2. Найти студента по ID")
         print("3. Добавить студента")
-        print("4. Выход")
+        print("4. Удаление студента по ID")
+        print("5. Выход")
 
         choice = input("Выберите действие: ")
 
@@ -65,7 +78,16 @@ def main():
             name = input("Имя студента: ")
             grades = input("Оценки через запятую (например: 4,5,3): ")
             add_new_student(name, grades)
-        elif choice == "4":
+
+        elif choice == "4" :
+            sid = int(input("Введите ID студента: "))
+            student = del_student(sid)
+            if student:
+                print(f"Студент {student['name']} удален")
+            else:
+                print("Студент не найден")
+        
+        elif choice == "5":
             break
         else:
             print("Неверный пункт меню")
