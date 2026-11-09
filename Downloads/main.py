@@ -49,7 +49,7 @@ def main():
         if choice == "1":
             print_report()
         elif choice == "2":
-            sid = input("Введите ID студента: ")
+            sid = int(input("Введите ID студента: "))
             student = find_student_by_id(sid)
             if student:
                 print(f"Найдено: {student['name']}, Оценки: {student['grades']}")
